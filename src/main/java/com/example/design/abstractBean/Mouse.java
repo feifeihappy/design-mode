@@ -12,10 +12,13 @@ import org.springframework.transaction.annotation.Transactional;
 public class Mouse extends Animal {
     private String name;
     private int id;
+    private StringBuilder ids;
 
 
     @Transactional
     public void eat(){
+
+        StringBuilder stringBuilder = new StringBuilder("abc");
         super.eat();
         System.out.println(name+"Mouse  正在吃");
     }
