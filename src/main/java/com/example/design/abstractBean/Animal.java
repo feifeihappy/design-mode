@@ -1,6 +1,6 @@
-package com.example.design;
+package com.example.design.abstractBean;
 
-import org.springframework.stereotype.Service;
+import jakarta.annotation.Resource;
 import org.springframework.transaction.annotation.Transactional;
 
 /**
@@ -8,16 +8,18 @@ import org.springframework.transaction.annotation.Transactional;
  * time：2025/3/24 13:59
  * auther：zhaopengfei
  */
-@Service
-public class Mouse extends Animal {
+
+public abstract class Animal {
     private String name;
     private int id;
 
+    @Resource
+    private Penguin penguin;
 
     @Transactional
     public void eat(){
-        super.eat();
-        System.out.println(name+"Mouse  正在吃");
+        penguin.eat();
+        System.out.println(name+"Animal 正在吃");
     }
     public void sleep(){
         System.out.println(name+"正在睡");

@@ -1,25 +1,19 @@
-package com.example.design;
+package com.example.design.abstractBean;
 
-import jakarta.annotation.Resource;
-import org.springframework.transaction.annotation.Transactional;
+import org.springframework.stereotype.Service;
 
 /**
  * description：TODO
  * time：2025/3/24 13:59
  * auther：zhaopengfei
  */
-
-public abstract class Animal {
+@Service
+public class Penguin {
     private String name;
     private int id;
 
-    @Resource
-    private Penguin penguin;
-
-    @Transactional
     public void eat(){
-        penguin.eat();
-        System.out.println(name+"Animal 正在吃");
+        System.out.println(name+"Penguin 正在吃");
     }
     public void sleep(){
         System.out.println(name+"正在睡");

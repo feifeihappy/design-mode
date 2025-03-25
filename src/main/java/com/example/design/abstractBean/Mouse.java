@@ -1,6 +1,7 @@
-package com.example.design;
+package com.example.design.abstractBean;
 
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 /**
  * description：TODO
@@ -8,12 +9,15 @@ import org.springframework.stereotype.Service;
  * auther：zhaopengfei
  */
 @Service
-public class Penguin {
+public class Mouse extends Animal {
     private String name;
     private int id;
 
+
+    @Transactional
     public void eat(){
-        System.out.println(name+"Penguin 正在吃");
+        super.eat();
+        System.out.println(name+"Mouse  正在吃");
     }
     public void sleep(){
         System.out.println(name+"正在睡");

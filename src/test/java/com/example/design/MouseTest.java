@@ -1,5 +1,6 @@
 package com.example.design;
 
+import com.example.design.abstractBean.Mouse;
 import jakarta.annotation.Resource;
 import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
