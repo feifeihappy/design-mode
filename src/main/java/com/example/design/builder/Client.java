@@ -7,6 +7,9 @@ package com.example.design.builder;
  */
 public class Client {
     public static void main(String[] args) {
+        StringBuilder stringBuilder = new StringBuilder();
+        stringBuilder.append("hello");
+
         Computer gamingPC = new StandardComputerBuilder()
                 .setCPU("Intel i9")
                 .setRAM("32GB DDR5")
