@@ -1,0 +1,50 @@
+@startuml
+
+
+
+interface AbstractFactory {
+Phone makePhone()
+PC makePC()
+}
+
+class XiaoMiFactory implements AbstractFactory{
+  Phone makePhone()
+  PC makePC()
+}
+
+class AppleFactory implements AbstractFactory{
+  Phone makePhone()
+  PC makePC()
+}
+
+interface Phone {
+make()
+}
+
+interface PC {
+     make()
+}
+
+class MiPhone implements Phone {
+make()
+}
+
+class IPhone implements Phone {
+make()
+}
+
+class MAC implements PC {
+ make()
+}
+
+class MiPC implements PC {
+ make()
+}
+
+AppleFactory ..|> IPhone
+XiaoMiFactory ..|> MiPhone
+
+AppleFactory ..|> MAC
+XiaoMiFactory ..|> MiPC
+
+@enduml

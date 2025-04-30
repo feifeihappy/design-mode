@@ -1,0 +1,32 @@
+@startuml
+
+
+
+interface AbstractFactory {
+Phone makePhone();
+}
+
+class XiaoMiFactory implements AbstractFactory{
+  Phone makePhone()
+}
+
+class AppleFactory implements AbstractFactory{
+  Phone makePhone()
+}
+
+interface Phone {
+make()
+}
+
+class MiPhone implements Phone {
+make()
+}
+
+class IPhone implements Phone {
+make()
+}
+
+AppleFactory ..|> IPhone
+XiaoMiFactory ..|> MiPhone
+
+@enduml
