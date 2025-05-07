@@ -1,0 +1,44 @@
+@startuml
+'https://plantuml.com/class-diagram
+class AdapterPatternDemo{
+void main()
+}
+
+ interface MediaPlayer {
+    void play()
+}
+
+'适配者类（Adaptee）：定义一个已经存在的接口，这个接口需要适配。
+class AudioPlayer implements MediaPlayer{
+MediaAdapter mediaAdapter;
+    void play()
+}
+
+'适配器类（Adapter）：实现目标接口，并通过组合或继承的方式调用适配者类中的方法，从而实现目标接口。
+class MediaAdapter implements MediaPlayer{
+ AdvancedMediaPlayer advancedMusicPlayer
+MediaAdapter()
+    void play()
+}
+
+ interface AdvancedMediaPlayer {
+    void playVlc()
+    void playMp4()
+}
+
+class VlcPlayer implements AdvancedMediaPlayer{
+    void playVlc()
+    void playMp4()
+}
+
+'目标接口（Target）：定义客户需要的接口。
+class Mp4Player implements AdvancedMediaPlayer{
+    void playVlc()
+    void playMp4()
+}
+
+AdapterPatternDemo --> AudioPlayer :使用
+MediaAdapter--> AdvancedMediaPlayer
+
+
+@enduml
