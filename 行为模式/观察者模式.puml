@@ -1,0 +1,31 @@
+@startuml
+'https://plantuml.com/class-diagram
+
+interface Product{
+follow()
+unfollow()
+}
+
+interface User{
+isExpectedPrice()
+shortMSG()
+}
+
+User-->Product : 观察
+
+class Laptop implements Product{
+List<User> followList
+curPrice
+setPrice()
+follow()
+notifyLowPrice()
+
+}
+class LaptopBuyer implements User{
+isExpectedPrice()
+shortMSG()
+}
+
+Laptop-->LaptopBuyer : 通知
+'LaptopBuyer-->User : 发短信
+@enduml
