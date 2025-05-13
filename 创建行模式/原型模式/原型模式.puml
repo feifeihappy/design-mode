@@ -1,0 +1,60 @@
+@startuml
+skinparam classAttributeIconSize 0
+
+abstract class Shape {
+    - String id
+    # String type
+    + {abstract} void draw()
+    + String getType()
+    + String getId()
+    + void setId(String id)
+    + Object clone()
+}
+
+class Circle {
+    + Circle()
+    + void draw()
+}
+
+class Square {
+    + Square()
+    + void draw()
+}
+
+class Rectangle {
+    + Rectangle()
+    + void draw()
+}
+
+class ShapeCache {
+    - static Hashtable<String, Shape> shapeMap
+    + static Shape getShape(String shapeId)
+    + static void loadCache()
+}
+
+class PrototypePatternDemo {
+    + static void main(String[] args)
+}
+
+Shape <|-- Circle
+Shape <|-- Square
+Shape <|-- Rectangle
+
+ShapeCache ..> Circle : creates
+ShapeCache ..> Square : creates
+ShapeCache ..> Rectangle : creates
+PrototypePatternDemo ..> ShapeCache : uses
+
+note left of ShapeCache::loadCache
+    预加载原型实例：
+    1. Circle(id=1)
+    2. Square(id=2)
+    3. Rectangle(id=3)
+end note
+
+note right of Shape::clone
+    实现克隆方法：
+    调用Object.clone()
+    支持原型模式的核心方法
+end note
+@endum
