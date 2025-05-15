@@ -1,27 +1,29 @@
 @startuml
 'https://plantuml.com/class-diagram
 
-abstract class AbstractList
-abstract AbstractCollection
-interface List
-interface Collection
-
-List <|-- AbstractList
-Collection <|-- AbstractCollection
-
-Collection <|- List
-AbstractCollection <|- AbstractList
-AbstractList <|-- ArrayList
-
-class ArrayList {
-Object[] elementData
-size()
+interface Image{
+    void display();
 }
+note left:  抽象主题
 
-enum TimeUnit {
-DAYS
-HOURS
-MINUTES
+class RealImage implements Image{
+    String fileName;
+    void display();
+    void loadFromDisk();
 }
+note left:  真实主题
+
+class ProxyImage implements Image{
+    RealImage realImage;
+    String fileName;
+    void display();
+}
+note left:  代理
+class Client{
+    void main();
+}
+note left:  客户端
+Client -->  ProxyImage:访问
+ProxyImage --> RealImage:创建
 
 @enduml
