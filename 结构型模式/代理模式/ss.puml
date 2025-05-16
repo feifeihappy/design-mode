@@ -1,0 +1,66 @@
+@startuml
+left to right direction
+
+rectangle "编译环境" {
+  file "Java源代码\n(.java文件)" as java_source
+  component "Java编译器\n(javac)" as javac
+  file "字节码文件\n(.class文件)" as class_file
+}
+
+rectangle "运行时环境" {
+  frame "JVM" {
+    component "类加载器" as class_loader
+    component "字节码验证器" as verifier
+    component "解释器" as interpreter
+    component "JIT编译器" as jit
+    component "运行时数据区" as runtime_data
+    component "执行引擎" as engine
+  }
+  component "Java运行时系统" as jre_system
+}
+
+component "操作系统" as os
+component "硬件平台" as hardware
+database "Java核心类库" as core_lib
+cloud "第三方脚本" as script {
+  component "脚本编译器" as script_compiler
+}
+
+' 主要编译流程
+java_source --> javac : 1. 编译
+javac --> class_file : 2. 生成
+core_lib --> javac : 3. 引用
+
+' 类加载流程
+class_file --> class_loader : 4. 加载
+class_loader --> verifier : 5. 验证
+verifier --> interpreter : 6. 准备执行
+
+' 执行流程
+interpreter --> engine : 7. 逐行解释
+jit --> engine : 8. 热点编译
+engine --> runtime_data : 9. 内存管理
+engine --> jre_system : 10. 系统调用
+
+' 系统交互
+jre_system --> os : 11. 资源调度
+os --> hardware : 12. 硬件指令
+
+' 扩展支持
+script_compiler --> java_source : 13. 代码生成
+core_lib --> jre_system : 14. 运行时依赖
+
+note right of jit
+  Just-In-Time
+  动态编译热点代码
+end note
+
+note left of class_loader
+  支持从：
+  - 本地文件系统
+  - 网络资源
+  - 加密包
+  加载类文件
+end note
+
+@enduml
