@@ -1,0 +1,57 @@
+@startuml
+
+title JVM 运行时内存区域
+
+frame "线程共享区域" as shared {
+  frame "堆 (Heap)" as heap {
+    rectangle "对象实例\n数组" as objects
+  }
+
+  frame "方法区 (Method Area)" as method_area {
+    rectangle "类信息\n常量\n静态变量\n编译器编译后的代码" as class_data
+    rectangle "常量池"
+  }
+
+
+}
+
+frame "线程私有区域" as thread_private {
+  frame "虚拟机栈 (JVM Stack)" as jvm_stack {
+    rectangle "栈帧 (Frame)" as frame1
+    rectangle "栈帧 (Frame)" as frame2
+    frame1 -[hidden]-> frame2
+  }
+
+  frame "本地方法栈 (Native Stack)" as native_stack {
+    rectangle "Native 方法调用" as native_method
+  }
+
+  rectangle "程序计数器 (PC Register)" as pc
+}
+
+note left of heap
+  - 所有线程共享
+  - 存储对象实例和数组
+  - GC 主要管理区域
+  - 分为新生代、老年代
+end note
+
+note right of method_area
+  - JDK8+ 后称为元空间（Metaspace）
+  - 包含运行时常量池
+  - 类型信息、字段、方法代码
+end note
+
+note left of jvm_stack
+  每个栈帧包含：
+  - 局部变量表
+  - 操作数栈
+  - 动态链接
+  - 方法返回地址
+end note
+
+shared ..> thread_private : 线程隔离区域
+jvm_stack ..> native_stack : Native 方法调用
+pc ..> jvm_stack : 当前执行位置
+
+@enduml

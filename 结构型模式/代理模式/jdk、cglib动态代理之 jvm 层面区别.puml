@@ -1,0 +1,57 @@
+@startuml
+
+skinparam backgroundColor #FFFFFF
+skinparam activityBackgroundColor #E6F3FF
+skinparam activityBorderColor #003366
+
+|java 编译环境|
+start
+
+:Java源代码\n(.java文件);
+
+partition "Java编译环境" {
+    :Java编译器;
+    -> 编译处理;
+    :生成字节码\n(.class文件，<color:red>jdk动态代理</color>);
+
+}
+|java平台运行期环境|
+partition "Java运行期环境" {
+    -> bytes;
+    :字节码本地\n或网络;
+    :java类库;
+
+
+partition jvm{
+  repeat :类装载器;
+    :字节码的验证;
+ fork
+        :解释器逐行解释执行;
+    fork again
+        :即时编译器(JIT)\n编译为机器码;
+    end fork
+
+backward:JVM运行时类的重加载(<color:red>cglib动态代理</color>);
+repeat while (运行期系统)
+note right
+1、Cglib就是基于asm操纵字节码
+2、根据.class文件的结构重构对应字节码
+3、对jvm方法区中类定义进行替换，因为堆(heap)中的Class对象是对方法区对象的封装
+4、可以理解为不改变对象头中的指向类的指针本身，而是只改变了内容
+5、系统无需重启，替换的类会立即生效
+    end note
+}
+
+}
+
+
+:操作系统;
+:硬件;
+
+stop
+
+
+
+
+
+@enduml
