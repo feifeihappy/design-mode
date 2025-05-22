@@ -1,0 +1,30 @@
+@startuml
+'https://plantuml.com/class-diagram
+interface Filter{
+init()
+ doFilter()
+ destroy()
+}
+
+interface FilterChain{
+doFilter()
+}
+
+class ApplicationFilterChain implements FilterChain{
+ApplicationFilterConfig[] filters
+addFilter()
+doFilter()
+internalDoFilter()
+
+
+}
+
+class Filter1 implements Filter{
+ doFilter()
+}
+
+class Filter2 implements Filter{
+ doFilter()
+}
+
+@enduml
