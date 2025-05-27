@@ -1,0 +1,25 @@
+@startuml
+'skinparam backgroundcolor white
+'skinparam defaultFontName Arial
+skinparam storage {
+  FontSize 20
+'  Style ellipse
+'  BorderColor transparent
+}
+
+storage "tomcat" #FFA500 {
+  storage "filter" #D8BFD8 {
+    storage "servlet" #FFC0CB {
+      storage "interceptor" #98FB98 {
+        storage "controller" #87CEEB
+      }
+    }
+  }
+}
+
+' 调整组件间距（可选）
+[tomcat] -[hidden]-> [filter]
+[filter] -[hidden]-> [servlet]
+[servlet] -[hidden]-> [interceptor]
+[interceptor] -[hidden]-> [controller]
+@enduml
