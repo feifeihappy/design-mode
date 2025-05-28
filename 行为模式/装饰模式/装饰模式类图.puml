@@ -1,0 +1,38 @@
+@startuml
+'https://plantuml.com/class-diagram
+
+
+class DecoratorPatternDemo{
+main()
+}
+
+interface Shape{
+draw()
+}
+note left: 组件接口
+
+class Circle implements Shape{
+draw()
+}
+note left: 具体组件
+
+class Rectangle implements Shape{
+draw()
+}
+note left: 具体组件
+
+abstract class ShapeDecorator implements Shape{
+Shape decoratedShape
+draw()
+}
+note right: 抽象装饰者
+
+class RedShapeDecorator extends ShapeDecorator{
+draw()
+setRedBorder()
+}
+note right: 具体装饰者
+
+DecoratorPatternDemo --|> Shape
+
+@enduml
