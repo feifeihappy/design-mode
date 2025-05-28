@@ -1,0 +1,45 @@
+@startuml
+' 定义抽象类 InputStream
+abstract class InputStream {
+    +abstract int read() throws IOException
+    +int read(byte b[]) throws IOException
+    +int read(byte b[], int off, int len) throws IOException
+    +long skip(long n) throws IOException
+    +int available() throws IOException
+    +void close() throws IOException
+    +void mark(int readlimit)
+    +void reset() throws IOException
+    +boolean markSupported()
+}
+
+note left: 抽象组件
+
+' 子类实现
+class ByteArrayInputStream
+class FilterInputStream
+note  right: 抽象装饰类
+class BufferedInputStream
+note  bottom: 具体装饰类，同级别亦是。
+class DataInputStream
+class PushbackInputStream
+class FileInputStream
+note  bottom: 具体组件，除FilterInputStream同级别亦是。
+class ObjectInputStream
+class PipedInputStream
+class SequenceInputStream
+class StringBufferInputStream
+
+' 继承关系
+InputStream <|-- ByteArrayInputStream
+InputStream <|-- FilterInputStream
+FilterInputStream <|--  BufferedInputStream
+FilterInputStream  <|-- DataInputStream
+FilterInputStream  <|-- PushbackInputStream
+FilterInputStream <|--  LineNumberInputStream
+InputStream  <|-- FileInputStream
+InputStream  <|-- ObjectInputStream
+InputStream  <|-- PipedInputStream
+InputStream  <|-- SequenceInputStream
+InputStream  <|-- StringBufferInputStream
+
+@enduml
