@@ -1,0 +1,47 @@
+@startuml
+'https://plantuml.com/class-diagram
+
+
+interface Order{
+execute()
+}
+note left :  命令
+
+class Stock{
+buy()
+sell()
+}
+note left : 接收者
+
+class BuyStock implements Order{
+Stock abcStock
+execute()
+}
+note left :  具体命令
+class SellStock implements Order{
+Stock abcStock
+execute()
+}
+note left :  具体命令
+
+class Broker{
+List<Order> orderList
+takeOrder()
+placeOrder()
+}
+
+note left : 调用者
+
+class CommandPatternDemo{
+main()
+}
+
+note left : 客户端
+
+CommandPatternDemo --|> Stock :使用
+CommandPatternDemo --|> Broker :使用
+Broker --|> Order :使用
+BuyStock --|> Stock :使用
+SellStock --|> Stock :使用
+
+@enduml
